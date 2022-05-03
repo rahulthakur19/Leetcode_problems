@@ -1,0 +1,34 @@
+class Solution {
+public:
+    string decodeString(string s) {
+        stack<string>str_stk;
+        stack<int>num_stk;
+        string res="";
+        int n=0;
+        for(int i=0;i<s.size();i++)
+        {
+            if(s[i]>='0' && s[i]<='9')
+                n=n*10+(s[i]-'0');
+            else if (s[i]>='a' && s[i]<='z')
+                res+=s[i];
+            else if(s[i]=='[')
+            {
+                str_stk.push(res);
+                res="";
+                num_stk.push(n);
+                n=0;
+            } 
+            else 
+            {
+                string s_top=str_stk.top();
+                int n_top=num_stk.top();
+                while (n_top--)
+                    s_top+=res;
+                res=s_top;
+                str_stk.pop();
+                num_stk.pop();
+            }
+        }
+        return res;
+    }
+};
