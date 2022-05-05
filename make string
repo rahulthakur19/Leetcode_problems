@@ -1,0 +1,23 @@
+public:
+    string tree2str(TreeNode* root) {
+        if(!root->left && !root->right)
+            return to_string(root->val);
+        
+        string ans = to_string(root->val), left = "", right = "";
+        if(root->left) 
+            left = "(" + tree2str(root->left) + ")";
+        if(root->right) 
+            right += "(" + tree2str(root->right) + ")";
+        
+        ans += left;
+        
+        // if left is empty but not right is not then we need to add empty paranthese to
+        // preserve mapping as mentioned
+        if(right.size() != 0 && left.size() == 0) 
+            ans += "()";
+    
+        ans += right;
+        
+        return ans;
+        
+    }
